@@ -6,8 +6,9 @@ module.exports = (sequelize, Sequelize) => {
       //TODO string of at least 3 characters
     },
     createdAt: {
-      type: Sequelize.DATETIME, //definitely check this, lol
-      type: Sequelize.DATE, defaultValue: Sequelize.NOW
+      // type: Sequelize.DATETIME,
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
     }
   })
 }

@@ -10,6 +10,16 @@ const errors = {
   NOT_FOUND: { message: 'not found' }
 }
 
+router.get('/sync', async (req, res) => {
+  try {
+    await models.connection.sync({ force: true })
+    res.status(201).json({ message: 'tables created' })
+  } catch (err) {
+    console.warn(err)
+    res.status(500).json(errors.SERVER_ERROR)
+  }
+})
+
 router.get('/playlists', async (req, res) => {
   try {
     let playlists
@@ -64,7 +74,7 @@ router.put('/playlists/:id', async (req, res) => {
   try {
     let playlist = await models.Playlist.findByPk(req.params.id)
     if (playlist) {
-      let modifiedPlaylist = await playlist.update(req.body, { fields: ['description', 'createdAt'] })
+      let modifiedPlaylist = await playlist.update(req.body, { fields: ['description'] })
       res.status(202).json(modifiedPlaylist)
     } else {
       res.status(404).json(errors.NOT_FOUND)

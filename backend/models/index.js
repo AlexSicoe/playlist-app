@@ -8,6 +8,7 @@ const sequelize = new Sequelize({
 })
 
 let db = {
+  connection: sequelize,
   Playlist: require('./playlist-model')(sequelize, Sequelize),
   Video: require('./video-model')(sequelize, Sequelize)
 }
