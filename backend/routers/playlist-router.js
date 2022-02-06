@@ -140,8 +140,8 @@ router.post('/playlists/:pid/videos', async (req, res) => {
     let playlist = await models.Playlist.findByPk(req.params.pid)
     if (playlist) {
       let video = req.body
-      video.playlist_id = playlist.id
-      let createdVideo = await Video.create(video)
+      video.playlistId = playlist.id
+      let createdVideo = await models.Video.create(video)
       res.status(201).json(createdVideo)
     } else {
       res.status(404).json(errors.NOT_FOUND)
@@ -156,7 +156,7 @@ router.put('/playlists/:pid/videos/:vid', async (req, res) => {
   try {
     let video = await models.Video.findByPk(req.params.vid, {
       where: {
-        playlist_id: req.params.pid
+        playlistId: req.params.pid
       }
     })
     if (video) {
@@ -175,7 +175,7 @@ router.delete('/playlists/:pid/videos/:vid', async (req, res) => {
   try {
     let video = await models.Video.findByPk(req.params.vid, {
       where: {
-        playlist_id: req.params.pid
+        playlistId: req.params.pid
       }
     })
     if (video) {
