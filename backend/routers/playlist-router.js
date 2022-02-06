@@ -103,7 +103,7 @@ router.delete('/playlists/:id', async (req, res) => {
 router.get('/playlists/:pid/videos', async (req, res) => {
   //TODO if filter
   try {
-    let playlist = await Playlist.findById(req.params.pid)
+    let playlist = await models.Playlist.findByPk(req.params.pid)
     if (playlist) {
       let videos = await playlist.getVideos()
       res.status(200).json(videos)
@@ -118,7 +118,7 @@ router.get('/playlists/:pid/videos', async (req, res) => {
 
 router.get('/playlists/:pid/videos/:vid', async (req, res) => {
   try {
-    let video = await Video.findById(req.params.vid, {
+    let video = await models.Video.findByPk(req.params.vid, {
       where: {
         playlist_id: req.params.pid
       }
@@ -137,7 +137,7 @@ router.get('/playlists/:pid/videos/:vid', async (req, res) => {
 
 router.post('/playlists/:pid/videos', async (req, res) => {
   try {
-    let playlist = await Playlist.findById(req.params.pid)
+    let playlist = await models.Playlist.findByPk(req.params.pid)
     if (playlist) {
       let video = req.body
       video.playlist_id = playlist.id
@@ -154,7 +154,7 @@ router.post('/playlists/:pid/videos', async (req, res) => {
 
 router.put('/playlists/:pid/videos/:vid', async (req, res) => {
   try {
-    let video = await Video.findById(req.params.vid, {
+    let video = await models.Video.findByPk(req.params.vid, {
       where: {
         playlist_id: req.params.pid
       }
@@ -173,7 +173,7 @@ router.put('/playlists/:pid/videos/:vid', async (req, res) => {
 
 router.delete('/playlists/:pid/videos/:vid', async (req, res) => {
   try {
-    let video = await Video.findById(req.params.vid, {
+    let video = await models.Video.findByPk(req.params.vid, {
       where: {
         playlist_id: req.params.pid
       }
