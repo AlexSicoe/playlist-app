@@ -1,17 +1,17 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, Sequelize) => {
   return sequelize.define('video', {
     description: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       // allowNull: false
       //TODO string of at least 5 characters
     },
     title: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false
       //TODO string of at least 5 characters
     },
     url: {
-      type: DataTypes.STRING,
+      type: Sequelize.STRING,
       allowNull: false,
       validate: {
         isUrl: true

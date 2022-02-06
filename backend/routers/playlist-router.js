@@ -179,3 +179,5 @@ router.delete('/playlists/:pid/videos/:vid', async (req, res) => {
     res.status(500).json(errors.SERVER_ERROR)
   }
 })
+
+module.exports = router
